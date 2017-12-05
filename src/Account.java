@@ -5,6 +5,7 @@ public class Account {
 //    float openingBalanceForFY;
     private float creditLimit;
     private final float CREDIT_THRESHOLD = 200f;
+    private final float NEAR_ZERO = 0.0f;
 
     String accountID;
     DepositAccount depositAccount;
@@ -60,4 +61,8 @@ public class Account {
         return Math.abs(getInterestRate()) < NEAR_ZERO && creditLimit <= CREDIT_THRESHOLD;
     }
 
+
+    public float getInterestRate() {
+        return interestRate;
+    }
 }
