@@ -3,6 +3,8 @@ import java.util.List;
 public class Account {
 
 //    float openingBalanceForFY;
+    private float creditLimit;
+    private final float CREDIT_THRESHOLD = 200f;
 
     String accountID;
     DepositAccount depositAccount;
@@ -44,6 +46,18 @@ public class Account {
         } else if (savingsAccount.isSavingsAcccount(discardValue, interestRate, this)) { // savingsAccount
             savingsAccount.doSavingsAccountActions(interestRate, this);
         }
+    }
+
+    private boolean isLoanAccount() {
+        return getInterestRate() > NEAR_ZERO && getBalance() <= 0f && creditLimit > CREDIT_THRESHOLD;
+    }
+
+    private boolean isSavingsAccount() {
+        return getInterestRate() > NEAR_ZERO && getBalance() >= 0 && (creditLimit == 0f);
+    }
+
+    private boolean isDepositAccount() {
+        return Math.abs(getInterestRate()) < NEAR_ZERO && creditLimit <= CREDIT_THRESHOLD;
     }
 
 }
